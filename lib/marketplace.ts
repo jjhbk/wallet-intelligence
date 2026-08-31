@@ -14,7 +14,24 @@ export function enrichMarketplaceChallenge(challenge: unknown) {
   value.resource = { ...(value.resource || {}), serviceName: "Base Wallet Decision Report", tags };
   value.extensions = { ...(value.extensions || {}), bazaar: { ...bazaar, category: "crypto", tags, iconUrl,
     info: { ...info, name: "Base Wallet Decision Report", serviceName: "Base Wallet Decision Report", description: "Evidence-backed Base wallet audit for agents.", iconUrl, input,
-      output: { type: "json", example: { decision: "caution", risk: { score: 25, level: "medium" }, findings: [] } } }, ...(schema ? { schema } : {}) } };
+      output: { type: "json", example: {
+        address: "0x0000000000000000000000000000000000000000",
+        network: "eip155:8453",
+        observedAt: "2026-01-01T00:00:00.000Z",
+        walletType: "eoa",
+        decision: "caution",
+        risk: { score: 25, level: "medium", confidence: "medium" },
+        recommendedAction: "request_human_confirmation",
+        summary: "Reviewable wallet signals were found.",
+        balances: { ethWei: "0", usdcBaseUnits: "0" },
+        activity: { transactionCount: 1, recentTransfers: 0, recentApprovals: 0 },
+        approvals: [],
+        transfers: [],
+        labels: [],
+        sanctions: { checked: false, status: "unavailable" },
+        findings: [],
+        limitations: ["Sanctions screening is unavailable without a configured provider."]
+      } } }, ...(schema ? { schema } : {}) } };
   value.serviceName = "Base Wallet Decision Report";
   value.tags = tags;
   value.iconUrl = iconUrl;
