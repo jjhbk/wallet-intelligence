@@ -1,0 +1,17 @@
+{
+  "name": "audit_base_wallet",
+  "serviceName": "Base Wallet Decision Report",
+  "description": "Audit a Base wallet before an agent sends funds or accepts a counterparty.",
+  "url": "/api/mcp",
+  "transport": "streamable-http",
+  "tags": ["crypto", "base", "wallet-risk", "approvals", "counterparty", "agent-safety", "usdc"],
+  "icon": "/icon.svg",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "address": { "type": "string", "format": "evm-address" },
+      "intent": { "type": "string", "enum": ["counterparty", "self-audit", "pre-transaction", "portfolio"] }
+    },
+    "required": ["address", "intent"]
+  }
+}

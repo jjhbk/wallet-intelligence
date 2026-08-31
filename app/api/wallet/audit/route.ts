@@ -4,6 +4,7 @@ import { inspectWallet } from "../../../../lib/audit/provider";
 import { buildReport } from "../../../../lib/audit/scoring";
 import { auditRequestSchema } from "../../../../lib/validation";
 import { renderBrowserPaywall } from "../../../../lib/browser-paywall";
+import { encodePaymentRequired, enrichMarketplaceChallenge } from "../../../../lib/marketplace";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -19,18 +20,19 @@ export async function GET(request: NextRequest) {
 
 async function handleAudit(request: NextRequest, input?: unknown) {
   const paywall = await getPaywall();
-  const payment = await paywall.handle({ path: "/api/wallet/audit", method: "POST", resource: request.url,
+  const payment = await paywall.handle({ path: "/api/wallet/audit", method: request.method, resource: request.url,
     query: request.nextUrl.searchParams,
     paymentHeader: request.headers.get("payment-signature") ?? request.headers.get("x-payment") });
   if (payment.kind !== "paid") {
     if (request.headers.get("accept")?.includes("text/html") && payment.challenge) {
-      const html = await renderBrowserPaywall(payment.challenge, request.url);
+      const challenge = enrichMarketplaceChallenge(payment.challenge);
+      const html = await renderBrowserPaywall(challenge, request.url);
       const headers = new Headers({ "content-type": "text/html; charset=utf-8" });
-      if (payment.paymentRequiredHeader) headers.set("PAYMENT-REQUIRED", payment.paymentRequiredHeader);
+      if (payment.challenge) headers.set("PAYMENT-REQUIRED", encodePaymentRequired(payment.challenge));
       return new Response(html, { status: payment.status ?? 402, headers });
     }
     const headers = new Headers();
-    if (payment.paymentRequiredHeader) headers.set("PAYMENT-REQUIRED", payment.paymentRequiredHeader);
+    if (payment.challenge) headers.set("PAYMENT-REQUIRED", encodePaymentRequired(payment.challenge));
     if (payment.ap2CheckoutJwt) headers.set("AP2-CHECKOUT-JWT", payment.ap2CheckoutJwt);
     return new Response(JSON.stringify(payment.challenge ?? { error: payment.reason }), { status: payment.status ?? 402, headers });
   }

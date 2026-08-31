@@ -8,5 +8,5 @@ export function buildReport(signals: WalletSignals): AuditReport {
   return { address: signals.address, network: "eip155:8453", observedAt: new Date().toISOString(), walletType: signals.walletType,
     decision, risk: { score, level, confidence: "medium" }, recommendedAction,
     summary: signals.findings.length ? `Found ${signals.findings.length} observable signal(s) requiring review.` : "No material signals were found in the MVP checks.",
-    balances: { ethWei: signals.ethWei }, activity: { transactionCount: signals.transactionCount }, findings: signals.findings, limitations: signals.limitations };
+    balances: { ethWei: signals.ethWei, usdcBaseUnits: signals.usdcBaseUnits }, activity: { transactionCount: signals.transactionCount, recentTransfers: signals.transfers.length, recentApprovals: signals.approvals.length }, approvals: signals.approvals, transfers: signals.transfers, labels: signals.labels, sanctions: signals.sanctions, findings: signals.findings, limitations: signals.limitations };
 }
