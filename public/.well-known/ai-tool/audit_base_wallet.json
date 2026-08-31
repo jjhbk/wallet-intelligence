@@ -1,7 +1,7 @@
 {
   "name": "audit_base_wallet",
   "serviceName": "Base Wallet Decision Report",
-  "description": "Audit a Base wallet before an agent sends funds or accepts a counterparty.",
+  "description": "Inspect a Base wallet before an agent pays it. Returns balances, wallet type, recent USDC transfers and approvals, known labels, and a proceed/caution/block recommendation with evidence.",
   "url": "/api/mcp",
   "transport": "streamable-http",
   "tags": ["crypto", "base", "wallet-risk", "approvals", "counterparty", "agent-safety", "usdc"],

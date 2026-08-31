@@ -12,8 +12,9 @@ export function enrichMarketplaceChallenge(challenge: unknown) {
     : { type: "http", method, queryParams: { address: "0x0000000000000000000000000000000000000000", intent: "counterparty" } };
   const schema = method === "POST" ? { $schema: "https://json-schema.org/draft/2020-12/schema", type: "object", properties: { input: { type: "object", properties: { type: { const: "http" }, method: { const: "POST" }, bodyType: { const: "json" }, body: { type: "object", properties: { address: { type: "string" }, intent: { type: "string" } }, required: ["address", "intent"] } }, required: ["type", "method", "bodyType", "body"] } }, required: ["input"] } : bazaar.schema;
   value.resource = { ...(value.resource || {}), serviceName: "Base Wallet Decision Report", tags };
+  const description = "Inspect a Base wallet before an agent pays it. Returns balances, wallet type, recent USDC transfers and approvals, known labels, and a proceed/caution/block recommendation with evidence.";
   value.extensions = { ...(value.extensions || {}), bazaar: { ...bazaar, category: "crypto", tags, iconUrl,
-    info: { ...info, name: "Base Wallet Decision Report", serviceName: "Base Wallet Decision Report", description: "Evidence-backed Base wallet audit for agents.", iconUrl, input,
+    info: { ...info, name: "Base Wallet Decision Report", serviceName: "Base Wallet Decision Report", description, iconUrl, input,
       output: { type: "json", example: {
         address: "0x0000000000000000000000000000000000000000",
         network: "eip155:8453",
@@ -32,6 +33,7 @@ export function enrichMarketplaceChallenge(challenge: unknown) {
         findings: [],
         limitations: ["Sanctions screening is unavailable without a configured provider."]
       } } }, ...(schema ? { schema } : {}) } };
+  value.resource.description = description;
   value.serviceName = "Base Wallet Decision Report";
   value.tags = tags;
   value.iconUrl = iconUrl;

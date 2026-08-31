@@ -14,7 +14,7 @@ export async function POST(request: Request) {
   const config = await getPaymentConfig();
   await createPaidMcpTool(server, config, {
     name: "audit_base_wallet",
-    description: "Audit a Base wallet before sending funds or accepting a counterparty.",
+    description: "Inspect a Base wallet before an agent pays it. Returns balances, wallet type, recent USDC transfers and approvals, known labels, and a proceed/caution/block recommendation with evidence.",
     inputSchema: { address: z.string().regex(/^0x[a-fA-F0-9]{40}$/), intent: z.enum(["counterparty", "self-audit", "pre-transaction", "portfolio"]) },
     inputJsonSchema: { type: "object", properties: { address: { type: "string", format: "evm-address" }, intent: { type: "string" } }, required: ["address", "intent"] },
     outputJsonSchema: { type: "object", description: "Evidence-backed Base wallet decision report." }, tags: ["crypto", "base", "wallet-risk", "agent-safety"], resourceUrl: "mcp://tool/audit_base_wallet",

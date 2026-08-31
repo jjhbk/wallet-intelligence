@@ -4,7 +4,7 @@ export default function Home() {
   return <main>
     <div className="eyebrow">Base · x402 · agent safety</div>
     <h1>Know what a wallet is about to do.</h1>
-    <p>Base Wallet Decision Report gives agents an evidence-backed preflight before they send funds, accept a counterparty, or interact with a contract.</p>
+    <p>Inspect a Base wallet before an agent pays it. Get ETH and USDC balances, wallet type, recent transfers and approvals, known labels, and a proceed, caution, or block recommendation.</p>
     <div className="actions"><a className="button secondary" href="/docs">Read the API docs →</a></div>
     <AuditForm />
     <div className="grid">
