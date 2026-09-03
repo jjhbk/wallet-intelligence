@@ -2,9 +2,9 @@ import { AuditForm } from "../../components/AuditForm";
 
 export default function DemoPage() {
   return <main>
-    <div className="eyebrow">Manual browser audit</div>
-    <h1>Audit a Base wallet.</h1>
-    <p>Paste an address below. You’ll be taken to the x402 wallet payment UI, then returned to the audit report after payment.</p>
+    <div className="eyebrow">Manual execution preflight</div>
+    <h1>Review a wallet or transaction.</h1>
+    <p>Choose a chain and intent, then paste an address. For a pre-transaction check, add the recipient and calldata so the report can explain what execution would do.</p>
     <AuditForm />
   </main>;
 }

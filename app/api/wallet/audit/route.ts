@@ -14,7 +14,9 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
-  const input = { address: request.nextUrl.searchParams.get("address"), intent: request.nextUrl.searchParams.get("intent") };
+  let transaction: unknown;
+  try { const raw = request.nextUrl.searchParams.get("transaction"); transaction = raw ? JSON.parse(raw) : undefined; } catch { transaction = undefined; }
+  const input = { address: request.nextUrl.searchParams.get("address"), intent: request.nextUrl.searchParams.get("intent"), chain: request.nextUrl.searchParams.get("chain") || "base", transaction };
   return handleAudit(request, input);
 }
 
@@ -39,7 +41,7 @@ async function handleAudit(request: NextRequest, input?: unknown) {
   try {
     const parsed = auditRequestSchema.safeParse(input ?? await request.json().catch(() => undefined));
     if (!parsed.success) return Response.json({ error: "invalid_request", details: parsed.error.flatten() }, { status: 400 });
-    const report = buildReport(await inspectWallet(parsed.data.address));
+    const report = buildReport(await inspectWallet(parsed.data.address, parsed.data.chain, parsed.data.transaction));
     const headers = new Headers();
     if (payment.settlementHeader) headers.set("PAYMENT-RESPONSE", payment.settlementHeader);
     return Response.json(report, { status: 200, headers });

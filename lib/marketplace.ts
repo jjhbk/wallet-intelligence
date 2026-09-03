@@ -1,4 +1,4 @@
-const tags = ["crypto", "base", "wallet-risk", "approvals", "counterparty", "agent-safety", "usdc"];
+const tags = ["crypto", "evm", "solana-payments", "wallet-risk", "approvals", "counterparty", "agent-safety", "usdc"];
 
 export function enrichMarketplaceChallenge(challenge: unknown) {
   if (!challenge || typeof challenge !== "object") return challenge;

@@ -18,8 +18,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@seedhape/x402-merchant-sdk':
-        specifier: ^0.3.5
-        version: 0.3.5(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)
+        specifier: ^0.4.0
+        version: 0.4.0(@x402/paywall@2.24.0(@tanstack/query-core@5.102.8)(@types/react@19.2.18)(@x402/evm@2.23.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(@x402/extensions@2.23.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(@x402/svm@2.24.0(@solana/kit@5.5.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10)))(algosdk@3.7.0)(bufferutil@4.1.0)(debug@4.4.3)(fastestsmallesttextencoderdecoder@1.0.22)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.8))(utf-8-validate@5.0.10)(ws@8.21.3(bufferutil@4.1.0)(utf-8-validate@5.0.10))(zod@3.25.76))(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10)
       '@types/pg':
         specifier: ^8.23.1
         version: 8.23.1
@@ -623,8 +623,13 @@ packages:
   '@scure/bip39@1.6.0':
     resolution: {integrity: sha512-+lF0BbLiJNwVlev4eKelw1WWLaiKXw7sSl8T6FvBlWkdX+94aGJ4o8XjUdlyhTCjd8c+B3KT3JfS8P0bLRNU6A==}
 
-  '@seedhape/x402-merchant-sdk@0.3.5':
-    resolution: {integrity: sha512-mOMaJbHrfGMTEl2118jIbQ8QlTpD6KUJt0aaYMJzdpOQiwjjxwOuq/LEg+D6zRvdkNMnsz57F0Z6eCSyX5SrGA==}
+  '@seedhape/x402-merchant-sdk@0.4.0':
+    resolution: {integrity: sha512-By0qXisQt0cxxXDiEhevVO3R1PA8mFtrzAEnZW3X8rjHnPjTriyVvVo48cVTD/AfwHNyp0siqjMoTH+qxmnSkQ==}
+    peerDependencies:
+      '@x402/paywall': ^2.23.0
+    peerDependenciesMeta:
+      '@x402/paywall':
+        optional: true
 
   '@signinwithethereum/siwe-parser@4.2.0':
     resolution: {integrity: sha512-e3edh8XpZrEjbzVYc0BZ4ySFOa8RKTZOQTafSf1E6ejCB5XcBH93jEpYmjzry1EEocgMNq4KlB3YunsFNCXakQ==}
@@ -1888,6 +1893,11 @@ packages:
     peerDependencies:
       react: ^19.0.0
       react-dom: ^19.0.0
+
+  '@x402/svm@2.23.0':
+    resolution: {integrity: sha512-o7rVfKkvkjP3paS3Hh0uMoITZS2exoWOeKlppgsJEb17Yg4uNgW5729mn0AaORVHaP2PFmxmLKyeVycZXvOV0w==}
+    peerDependencies:
+      '@solana/kit': '>=5.1.0'
 
   '@x402/svm@2.24.0':
     resolution: {integrity: sha512-j/2ARlUaDipqGyMuQOCbxSr+Pr7sANsksL1HXMCqYmTnNhX8BqZGIYTXNxbkNON47QKaojSdRckXwHwX0oIVrg==}
@@ -4549,19 +4559,25 @@ snapshots:
       '@noble/hashes': 1.8.0
       '@scure/base': 1.2.6
 
-  '@seedhape/x402-merchant-sdk@0.3.5(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)':
+  '@seedhape/x402-merchant-sdk@0.4.0(@x402/paywall@2.24.0(@tanstack/query-core@5.102.8)(@types/react@19.2.18)(@x402/evm@2.23.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(@x402/extensions@2.23.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(@x402/svm@2.24.0(@solana/kit@5.5.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10)))(algosdk@3.7.0)(bufferutil@4.1.0)(debug@4.4.3)(fastestsmallesttextencoderdecoder@1.0.22)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.8))(utf-8-validate@5.0.10)(ws@8.21.3(bufferutil@4.1.0)(utf-8-validate@5.0.10))(zod@3.25.76))(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10)':
     dependencies:
       '@modelcontextprotocol/sdk': 1.30.0(zod@3.25.76)
+      '@solana/kit': 5.5.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10)
       '@x402/core': 2.23.0
       '@x402/evm': 2.23.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)
       '@x402/extensions': 2.23.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)
       '@x402/mcp': 2.23.0
+      '@x402/svm': 2.23.0(@solana/kit@5.5.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10))
       jose: 6.2.10
       zod: 3.25.76
+    optionalDependencies:
+      '@x402/paywall': 2.24.0(@tanstack/query-core@5.102.8)(@types/react@19.2.18)(@x402/evm@2.23.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(@x402/extensions@2.23.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(@x402/svm@2.24.0(@solana/kit@5.5.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10)))(algosdk@3.7.0)(bufferutil@4.1.0)(debug@4.4.3)(fastestsmallesttextencoderdecoder@1.0.22)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.8))(utf-8-validate@5.0.10)(ws@8.21.3(bufferutil@4.1.0)(utf-8-validate@5.0.10))(zod@3.25.76)
     transitivePeerDependencies:
       - '@cfworker/json-schema'
+      - '@solana/sysvars'
       - bufferutil
       - ethers
+      - fastestsmallesttextencoderdecoder
       - supports-color
       - typescript
       - utf-8-validate
@@ -6847,6 +6863,16 @@ snapshots:
       - utf-8-validate
       - ws
       - zod
+
+  '@x402/svm@2.23.0(@solana/kit@5.5.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10))':
+    dependencies:
+      '@solana-program/compute-budget': 0.11.0(@solana/kit@5.5.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10))
+      '@solana-program/token': 0.9.0(@solana/kit@5.5.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10))
+      '@solana-program/token-2022': 0.6.1(@solana/kit@5.5.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10))
+      '@solana/kit': 5.5.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10)
+      '@x402/core': 2.23.0
+    transitivePeerDependencies:
+      - '@solana/sysvars'
 
   '@x402/svm@2.24.0(@solana/kit@5.5.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10))':
     dependencies:
