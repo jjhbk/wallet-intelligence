@@ -3,12 +3,13 @@ export async function getPaywall() {
     import("@seedhape/x402-merchant-sdk"), import("@coinbase/cdp-sdk/x402"),
   ]);
   const { persistReceipt } = await import("./receipts");
+  const cdpFacilitator = { url: process.env.CDP_FACILITATOR_URL || "https://api.cdp.coinbase.com/platform/v2/x402", client: createCdpFacilitatorClient({
+    apiKeyId: process.env.CDP_API_KEY_ID || "", apiKeySecret: process.env.CDP_API_KEY_SECRET || "",
+  }) };
   const auditPayment = merchantConfig(base, {
   payTo: process.env.MERCHANT_WALLET || "0x0000000000000000000000000000000000000000",
-  accepts: process.env.SOLANA_MERCHANT_WALLET ? [{ ...base, payTo: process.env.MERCHANT_WALLET || "0x0000000000000000000000000000000000000000" }, { ...solana, payTo: process.env.SOLANA_MERCHANT_WALLET, feePayer: process.env.SOLANA_FEE_PAYER }] : undefined,
-  facilitator: { url: process.env.CDP_FACILITATOR_URL || "https://api.cdp.coinbase.com/platform/v2/x402", client: createCdpFacilitatorClient({
-    apiKeyId: process.env.CDP_API_KEY_ID || "", apiKeySecret: process.env.CDP_API_KEY_SECRET || "",
-  }) },
+  accepts: process.env.SOLANA_MERCHANT_WALLET ? [{ ...base, payTo: process.env.MERCHANT_WALLET || "0x0000000000000000000000000000000000000000", facilitator: cdpFacilitator }, { ...solana, payTo: process.env.SOLANA_MERCHANT_WALLET, feePayer: process.env.SOLANA_FEE_PAYER, facilitator: solana.facilitator }] : undefined,
+  facilitator: cdpFacilitator,
   paymentMethods: ["eip3009"], price: { amount: 50_000n, ...base }, browserPaywall: { appName: "WalletGuard", appLogo: `${process.env.PUBLIC_APP_URL || "http://localhost:3000"}/icon.svg`, testnet: false },
   description: "WalletGuard preflights wallet and transaction execution across major EVM chains, returning balances, activity, approvals, known labels, and a proceed/caution/block recommendation with evidence.",
   route: { name: "WalletGuard", description: "WalletGuard preflights wallet and transaction execution across major EVM chains, returning balances, activity, approvals, known labels, and a proceed/caution/block recommendation with evidence.", category: "crypto", docsUrl: `${process.env.PUBLIC_APP_URL || "http://localhost:3000"}/docs`,
@@ -24,10 +25,11 @@ export async function getPaymentConfig() {
     import("@seedhape/x402-merchant-sdk"), import("@coinbase/cdp-sdk/x402"),
   ]);
   const { persistReceipt } = await import("./receipts");
+  const cdpFacilitator = { url: process.env.CDP_FACILITATOR_URL || "https://api.cdp.coinbase.com/platform/v2/x402", client: createCdpFacilitatorClient({ apiKeyId: process.env.CDP_API_KEY_ID || "", apiKeySecret: process.env.CDP_API_KEY_SECRET || "" }) };
   return merchantConfig(base, {
     payTo: process.env.MERCHANT_WALLET || "0x0000000000000000000000000000000000000000",
-    accepts: process.env.SOLANA_MERCHANT_WALLET ? [{ ...base, payTo: process.env.MERCHANT_WALLET || "0x0000000000000000000000000000000000000000" }, { ...solana, payTo: process.env.SOLANA_MERCHANT_WALLET, feePayer: process.env.SOLANA_FEE_PAYER }] : undefined,
-    facilitator: { url: process.env.CDP_FACILITATOR_URL || "https://api.cdp.coinbase.com/platform/v2/x402", client: createCdpFacilitatorClient({ apiKeyId: process.env.CDP_API_KEY_ID || "", apiKeySecret: process.env.CDP_API_KEY_SECRET || "" }) },
+    accepts: process.env.SOLANA_MERCHANT_WALLET ? [{ ...base, payTo: process.env.MERCHANT_WALLET || "0x0000000000000000000000000000000000000000", facilitator: cdpFacilitator }, { ...solana, payTo: process.env.SOLANA_MERCHANT_WALLET, feePayer: process.env.SOLANA_FEE_PAYER, facilitator: solana.facilitator }] : undefined,
+    facilitator: cdpFacilitator,
     paymentMethods: ["eip3009"], price: { amount: 50_000n, ...base }, browserPaywall: { appName: "WalletGuard", appLogo: `${process.env.PUBLIC_APP_URL || "http://localhost:3000"}/icon.svg`, testnet: false },
     description: "WalletGuard preflights wallet and transaction execution across major EVM chains, returning balances, activity, approvals, known labels, and a proceed/caution/block recommendation with evidence.",
     route: { name: "WalletGuard", description: "WalletGuard preflights wallet and transaction execution across major EVM chains, returning balances, activity, approvals, known labels, and a proceed/caution/block recommendation with evidence.", category: "crypto", docsUrl: `${process.env.PUBLIC_APP_URL || "http://localhost:3000"}/docs` },
