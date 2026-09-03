@@ -24,20 +24,43 @@ export function AuditForm() {
   }
 
   return <form className="audit-form" onSubmit={submit}>
-    <label htmlFor="address">Wallet address</label>
-    <input id="address" value={address} onChange={(event) => setAddress(event.target.value)} placeholder="0x..." spellCheck={false} autoComplete="off" />
-    <label htmlFor="chain">Chain</label>
-    <select id="chain" value={chain} onChange={(event) => setChain(event.target.value)}><option value="base">Base</option><option value="ethereum">Ethereum</option><option value="arbitrum">Arbitrum One</option><option value="optimism">Optimism</option></select>
-    <label htmlFor="intent">Audit intent</label>
-    <select id="intent" value={intent} onChange={(event) => setIntent(event.target.value)}>
-      <option value="counterparty">Counterparty</option>
-      <option value="self-audit">Self audit</option>
-      <option value="pre-transaction">Pre-transaction</option>
-      <option value="portfolio">Portfolio</option>
-    </select>
-    {intent === "pre-transaction" && <><label htmlFor="to">Transaction recipient</label><input id="to" value={to} onChange={(event) => setTo(event.target.value)} placeholder="0x..." spellCheck={false} /><label htmlFor="data">Calldata (optional)</label><input id="data" value={data} onChange={(event) => setData(event.target.value)} placeholder="0x..." spellCheck={false} /></>}
+    <div>
+      <p className="form-kicker">Live report</p>
+      <h2>Run a wallet execution check</h2>
+    </div>
+    <div className="field">
+      <label htmlFor="address">Wallet address</label>
+      <input id="address" value={address} onChange={(event) => setAddress(event.target.value)} placeholder="0x742d35Cc6634C0532925a3b844Bc454e4438f44e" spellCheck={false} autoComplete="off" />
+    </div>
+    <div className="form-row">
+      <div className="field">
+        <label htmlFor="chain">Chain</label>
+        <select id="chain" value={chain} onChange={(event) => setChain(event.target.value)}><option value="base">Base</option><option value="ethereum">Ethereum</option><option value="arbitrum">Arbitrum One</option><option value="optimism">Optimism</option></select>
+      </div>
+      <div className="field">
+        <label htmlFor="intent">Audit intent</label>
+        <select id="intent" value={intent} onChange={(event) => setIntent(event.target.value)}>
+          <option value="counterparty">Counterparty</option>
+          <option value="self-audit">Self audit</option>
+          <option value="pre-transaction">Pre-transaction</option>
+          <option value="portfolio">Portfolio</option>
+        </select>
+      </div>
+    </div>
+    {intent === "pre-transaction" && <div className="transaction-fields">
+      <div className="field">
+        <label htmlFor="to">Transaction recipient</label>
+        <input id="to" value={to} onChange={(event) => setTo(event.target.value)} placeholder="0x..." spellCheck={false} />
+      </div>
+      <div className="field">
+        <label htmlFor="data">Calldata</label>
+        <input id="data" value={data} onChange={(event) => setData(event.target.value)} placeholder="0x..." spellCheck={false} />
+      </div>
+    </div>}
     {error && <p className="form-error">{error}</p>}
-    <button className="button" type="submit">Audit wallet →</button>
-    <small>Price: 0.05 USDC. Payment settles on Base; audits can inspect any supported chain.</small>
+    <div className="form-footer">
+      <button className="button" type="submit">Audit wallet</button>
+      <span>0.05 USDC on Base</span>
+    </div>
   </form>;
 }

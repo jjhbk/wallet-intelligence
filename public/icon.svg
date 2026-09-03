@@ -1,1 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" rx="56" fill="#08111f"/><path d="M128 35 193 70v76l-65 38-65-38V70l65-35Z" fill="none" stroke="#64e6b5" stroke-width="14"/><path d="m93 124 23 23 48-54" fill="none" stroke="#edf4ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="14"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="WalletGuard icon">
+  <defs>
+    <linearGradient id="bg" x1="30" y1="20" x2="226" y2="236" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0f2d3a"/>
+      <stop offset=".52" stop-color="#0b1724"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="coin" x1="78" y1="70" x2="182" y2="186" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7dd3fc"/>
+      <stop offset=".45" stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#f8c96a"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="52" fill="url(#bg)"/>
+  <path d="M65 84c0-12 10-22 22-22h84c12 0 22 10 22 22v84c0 12-10 22-22 22H87c-12 0-22-10-22-22V84Z" fill="#f8fafc" opacity=".08"/>
+  <path d="M80 91c0-9 7-16 16-16h65c9 0 16 7 16 16v70c0 9-7 16-16 16H96c-9 0-16-7-16-16V91Z" fill="#0b1724" stroke="#e5eef8" stroke-opacity=".24" stroke-width="6"/>
+  <path d="M96 104h68v21H96z" fill="#e5eef8" opacity=".13"/>
+  <circle cx="130" cy="132" r="45" fill="url(#coin)"/>
+  <path d="M130 89c21 12 32 26 33 43-1 17-12 31-33 43-21-12-32-26-33-43 1-17 12-31 33-43Z" fill="#0b1724" opacity=".2"/>
+  <path d="m108 133 15 15 31-37" fill="none" stroke="#f8fafc" stroke-linecap="round" stroke-linejoin="round" stroke-width="13"/>
+  <circle cx="175" cy="123" r="9" fill="#f8fafc"/>
+</svg>

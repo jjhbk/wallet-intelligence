@@ -2,15 +2,49 @@ import { AuditForm } from "../components/AuditForm";
 
 export default function Home() {
   return <main>
-    <div className="eyebrow">Wallet Execution Guard · x402</div>
-    <h1>Know what an agent is about to execute.</h1>
-    <p>Preflight a wallet or transaction across major EVM chains. Get an actionable proceed, caution, or block recommendation with the evidence and limitations behind it.</p>
-    <div className="actions"><a className="button secondary" href="/docs">Read the API docs →</a></div>
-    <AuditForm />
-    <div className="grid">
-      <section className="card"><h2>One paid endpoint</h2><p><code>POST /api/wallet/audit</code><br />0.05 USDC per report.</p></section>
-      <section className="card"><h2>Machine-readable</h2><p>Stable decisions, findings, evidence, and explicit limitations for automated callers.</p></section>
-      <section className="card"><h2>Multi-chain</h2><p>Base, Ethereum, Arbitrum, and Optimism with chain-aware tokens, RPC reads, and explorer evidence.</p></section>
-    </div>
+    <header className="site-header">
+      <a className="brand" href="/" aria-label="WalletGuard home">
+        <img src="/icon.svg" alt="" />
+        <span>WalletGuard</span>
+      </a>
+      <nav>
+        <a href="/demo">Demo</a>
+        <a href="/docs">API</a>
+      </nav>
+    </header>
+
+    <section className="hero">
+      <div className="hero-copy">
+        <div className="eyebrow">x402 wallet intelligence</div>
+        <h1>Know whether a wallet action is safe to run.</h1>
+        <p>WalletGuard turns address and transaction signals into a clear proceed, caution, or block decision for agents, marketplaces, and payment flows.</p>
+        <div className="actions">
+          <a className="button" href="#audit">Run an audit</a>
+          <a className="button secondary" href="/docs">View API docs</a>
+        </div>
+        <div className="proof-strip">
+          <span>Base payments</span>
+          <span>4 EVM chains</span>
+          <span>Machine-readable reports</span>
+        </div>
+      </div>
+      <div id="audit" className="hero-panel">
+        <AuditForm />
+      </div>
+    </section>
+
+    <section className="insight-band" aria-label="Report summary preview">
+      <div>
+        <span className="status-pill caution">Caution</span>
+        <h2>Built for decisions, not dashboards.</h2>
+      </div>
+      <p>Each report returns normalized findings, evidence links, balance context, and explicit limitations so automated callers can act without scraping prose.</p>
+    </section>
+
+    <section className="grid">
+      <article className="card"><span>01</span><h2>Paid endpoint</h2><p><code>POST /api/wallet/audit</code> returns one report for 0.05 USDC with x402 discovery metadata.</p></article>
+      <article className="card"><span>02</span><h2>Execution preflight</h2><p>Check wallet balance, recipient, calldata, and risk findings before an agent submits a transaction.</p></article>
+      <article className="card"><span>03</span><h2>Marketplace ready</h2><p>Includes Bazaar-compatible icon metadata, schema details, tags, and stable output structure for indexers.</p></article>
+    </section>
   </main>;
 }
